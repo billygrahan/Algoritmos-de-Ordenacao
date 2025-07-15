@@ -5,27 +5,45 @@
 using namespace std;
 using namespace std::chrono;
 
-void insertionSort(vector<int>& arr) {
-    for (int i = 1; i < arr.size(); ++i) {
-        int key = arr[i];
-        int j = i - 1;
-        while (j >= 0 && arr[j] > key) {
-            arr[j + 1] = arr[j];
-            --j;
+int partition(vector<int>& arr, int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+    for (int j = low; j < high; ++j) {
+        if (arr[j] < pivot) {
+            ++i;
+            swap(arr[i], arr[j]);
         }
-        arr[j + 1] = key;
+    }
+    swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+
+void quickSort(vector<int>& arr, int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
     }
 }
 
-void insertionSort_chat(vector<char>& arr) {
-    for (int i = 1; i < arr.size(); ++i) {
-        char key = arr[i];
-        int j = i - 1;
-        while (j >= 0 && arr[j] > key) {
-            arr[j + 1] = arr[j];
-            --j;
+int partition_char(vector<char>& arr, int low, int high) {
+    char pivot = arr[high];
+    int i = low - 1;
+    for (int j = low; j < high; ++j) {
+        if (arr[j] < pivot) {
+            ++i;
+            swap(arr[i], arr[j]);
         }
-        arr[j + 1] = key;
+    }
+    swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+
+void quickSort_char(vector<char>& arr, int low, int high) {
+    if (low < high) {
+        int pi = partition_char(arr, low, high);
+        quickSort_char(arr, low, pi - 1);
+        quickSort_char(arr, pi + 1, high);
     }
 }
 
@@ -39,7 +57,7 @@ void orderedArray(vector<int>& arr) {
 
     auto start = high_resolution_clock::now();
 
-    insertionSort(arr);
+    //insertionSort(arr);
 
     // Fim da medição
     auto end = high_resolution_clock::now();
@@ -64,7 +82,7 @@ void orderedArray_char(vector<char>& arr) {
 
     auto start = high_resolution_clock::now();
 
-    insertionSort_chat(arr);
+    //insertionSort_chat(arr);
 
     // Fim da medição
     auto end = high_resolution_clock::now();

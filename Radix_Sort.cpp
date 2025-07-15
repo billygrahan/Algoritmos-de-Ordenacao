@@ -5,30 +5,6 @@
 using namespace std;
 using namespace std::chrono;
 
-void insertionSort(vector<int>& arr) {
-    for (int i = 1; i < arr.size(); ++i) {
-        int key = arr[i];
-        int j = i - 1;
-        while (j >= 0 && arr[j] > key) {
-            arr[j + 1] = arr[j];
-            --j;
-        }
-        arr[j + 1] = key;
-    }
-}
-
-void insertionSort_chat(vector<char>& arr) {
-    for (int i = 1; i < arr.size(); ++i) {
-        char key = arr[i];
-        int j = i - 1;
-        while (j >= 0 && arr[j] > key) {
-            arr[j + 1] = arr[j];
-            --j;
-        }
-        arr[j + 1] = key;
-    }
-}
-
 void orderedArray(vector<int>& arr) {
     cout << endl  << endl << "-------------------------------------------------------------------"<< endl;
     cout << "arrey: ";
@@ -39,7 +15,7 @@ void orderedArray(vector<int>& arr) {
 
     auto start = high_resolution_clock::now();
 
-    insertionSort(arr);
+    //insertionSort(arr);
 
     // Fim da medição
     auto end = high_resolution_clock::now();
@@ -64,7 +40,7 @@ void orderedArray_char(vector<char>& arr) {
 
     auto start = high_resolution_clock::now();
 
-    insertionSort_chat(arr);
+    //insertionSort_chat(arr);
 
     // Fim da medição
     auto end = high_resolution_clock::now();
@@ -87,12 +63,7 @@ int main() {
     vector<int> arr5 = {1,2,5,4,0,0,2,6,4,6};
     vector<int> arr6 = {49230, 89952, 25237, 91194, 97087, 48569, 16673, 45849, 38870, 13701};
 
-    orderedArray(arr1);
     orderedArray_char(arr2);
-    orderedArray(arr3);
-    orderedArray(arr4);
-    orderedArray(arr5);
-    orderedArray(arr6);
 
     return 0;
 }

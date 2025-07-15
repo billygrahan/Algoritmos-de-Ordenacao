@@ -5,27 +5,68 @@
 using namespace std;
 using namespace std::chrono;
 
-void insertionSort(vector<int>& arr) {
-    for (int i = 1; i < arr.size(); ++i) {
-        int key = arr[i];
-        int j = i - 1;
-        while (j >= 0 && arr[j] > key) {
-            arr[j + 1] = arr[j];
-            --j;
+void merge(vector<int>& arr, int esq, int meio, int dir) {
+    vector<int> x;
+    int i = esq, j = meio + 1;
+
+    while (i <= meio && j <= dir) {
+        if (arr[i] <= arr[j]) {
+            x.push_back(arr[i++]);
+        } else {
+            x.push_back(arr[j++]);
         }
-        arr[j + 1] = key;
+    }
+
+    while (i <= meio) 
+        x.push_back(arr[i++]);
+
+    while (j <= dir)  
+        x.push_back(arr[j++]);
+
+    for (int k = 0; k < x.size(); ++k) {
+        arr[esq + k] = x[k];
     }
 }
 
-void insertionSort_chat(vector<char>& arr) {
-    for (int i = 1; i < arr.size(); ++i) {
-        char key = arr[i];
-        int j = i - 1;
-        while (j >= 0 && arr[j] > key) {
-            arr[j + 1] = arr[j];
-            --j;
+void mergeSort(vector<int>& arr, int esq, int dir) {
+    if (esq < dir) {
+        int meio = esq + (dir - esq) / 2;
+        mergeSort(arr, esq, meio);
+        mergeSort(arr, meio + 1, dir);
+        merge(arr, esq, meio, dir);
+    }
+}
+
+void merge_char(vector<char>& arr, int esq, int meio, int dir) {
+    vector<char> x;
+    int i = esq, j = meio + 1;
+
+    while (i <= meio && j <= dir) {
+        if (arr[i] <= arr[j]) {
+            x.push_back(arr[i++]);
+        } 
+        else {
+            x.push_back(arr[j++]);
         }
-        arr[j + 1] = key;
+    }
+
+    while (i <= meio) 
+        x.push_back(arr[i++]);
+
+    while (j <= dir)  
+        x.push_back(arr[j++]);
+
+    for (int k = 0; k < x.size(); ++k) {
+        arr[esq + k] = x[k];
+    }
+}
+
+void mergeSort_char(vector<char>& arr, int esq, int dir) {
+    if (esq < dir) {
+        int meio = esq + (dir - esq) / 2;
+        mergeSort_char(arr, esq, meio);
+        mergeSort_char(arr, meio + 1, dir);
+        merge_char(arr, esq, meio, dir);
     }
 }
 
@@ -39,7 +80,7 @@ void orderedArray(vector<int>& arr) {
 
     auto start = high_resolution_clock::now();
 
-    insertionSort(arr);
+    mergeSort(arr, 0, arr.size() - 1);
 
     // Fim da medição
     auto end = high_resolution_clock::now();
@@ -64,7 +105,7 @@ void orderedArray_char(vector<char>& arr) {
 
     auto start = high_resolution_clock::now();
 
-    insertionSort_chat(arr);
+    mergeSort_char(arr, 0, arr.size() - 1);
 
     // Fim da medição
     auto end = high_resolution_clock::now();
