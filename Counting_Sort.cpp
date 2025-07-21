@@ -6,25 +6,25 @@
 using namespace std;
 using namespace std::chrono;
 
-void countingSort(vector<int>& arr) {
-    if (arr.empty()) return;
+vector<int> countingSort(const vector<int>& A, int k) {
+    int n = A.size();
+    vector<int> Saida(n);
+    vector<int> Count(k + 1, 0); 
 
-    int minVal = *min_element(arr.begin(), arr.end());
-    int maxVal = *max_element(arr.begin(), arr.end());
-    int range = maxVal - minVal + 1;
-
-    vector<int> count(range, 0);
-
-    for (int num : arr) {
-        count[num - minVal]++;
+    for (int j = 0; j < n; j++) {
+        Count[A[j]] = Count[A[j]] + 1;
     }
 
-    int idx = 0;
-    for (int i = 0; i < range; ++i) {
-        while (count[i]-- > 0) {
-            arr[idx++] = i + minVal;
-        }
+    for (int i = 1; i <= k; i++) {
+        Count[i] = Count[i] + Count[i - 1];
     }
+
+    for (int j = n - 1; j >= 0; j--) {
+        Saida[Count[A[j]] - 1] = A[j];
+        Count[A[j]] = Count[A[j]] - 1;
+    }
+
+    return Saida;
 }
 
 void orderedArray(vector<int>& arr) {
@@ -37,7 +37,7 @@ void orderedArray(vector<int>& arr) {
 
     auto start = high_resolution_clock::now();
 
-    //insertionSort(arr);
+    countingSort(arr, *max_element(arr.begin(), arr.end()));
 
     // Fim da medição
     auto end = high_resolution_clock::now();
