@@ -99,29 +99,43 @@ void orderedArray_char_Dec(vector<char> &arr)
     }
 }
 
+void teste(int qtd, vector<char> &arr)
+{
+    vector<char> arr0 = arr;
+    for (int i = 0; i < qtd; ++i)
+    {
+        cout << endl
+             << endl
+             << "-------------------------------------------------------------------" << endl;
+        cout << "Teste " << (i + 1) * 10 << endl;
+        cout << "arrey: ";
+        for (int i = 0; i < arr0.size(); ++i)
+        {
+            cout << arr0[i] << " ";
+        }
+        cout << endl
+             << endl;
+
+        vector<char> arr1 = arr0;
+        orderedArray_char(arr1);
+        cout << endl
+             << endl;
+        vector<char> arr2 = arr0;
+        orderedArray_char_Dec(arr2);
+
+        cout << endl
+             << "-------------------------------------------------------------------" << endl
+             << endl;
+
+        arr0.insert(arr0.end(), arr.begin(), arr.end());
+    }
+}
+
 int main()
 {
     vector<char> arr = {'b', 'i', 'l', 'l', 'y', 'g', 'r', 'a', 'h', 'a', 'n'};
-    cout << endl
-         << endl
-         << "-------------------------------------------------------------------" << endl;
-    cout << "arrey: ";
-    for (int i = 0; i < arr.size(); ++i)
-    {
-        cout << arr[i] << " ";
-    }
-    cout << endl
-         << endl;
+    
+    teste(20, arr);
 
-    vector<char> arr1 = arr;
-    orderedArray_char(arr1);
-    cout << endl
-         << endl;
-    vector<char> arr2 = arr;
-    orderedArray_char_Dec(arr2);
-
-    cout << endl
-         << "-------------------------------------------------------------------" << endl
-         << endl;
     return 0;
 }

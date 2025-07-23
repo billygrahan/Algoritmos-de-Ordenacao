@@ -53,5 +53,7 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp"
-    }
+    },
+    "C_Cpp.default.compilerPath": "/usr/bin/gcc-13",
+    "C_Cpp.errorSquiggles": "disabled"
 }

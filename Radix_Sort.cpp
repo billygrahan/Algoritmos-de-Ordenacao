@@ -131,28 +131,41 @@ void orderedArray_Decrescente(vector<int> &arr)
 //     cout << endl << "-------------------------------------------------------------------" << endl << endl;
 // }
 
+void teste(int qtd, vector<int> &arr)
+{
+    vector<int> arr0 = arr;
+    for (int i = 0; i < qtd; ++i)
+    {
+        cout << endl
+             << endl
+             << "-------------------------------------------------------------------" << endl;
+        cout << "Teste " << (i + 1) * 10 << endl;
+        cout << "arrey: ";
+        for (int i = 0; i < arr0.size(); ++i)
+        {
+            cout << arr0[i] << " ";
+        }
+        cout << endl
+             << endl;
+
+        vector<int> arr1 = arr0;
+        orderedArray(arr1);
+        cout << endl
+             << endl;
+        vector<int> arr2 = arr0;
+        orderedArray_Decrescente(arr2);
+
+        cout << endl
+             << "-------------------------------------------------------------------" << endl
+             << endl;
+
+        arr0.insert(arr0.end(), arr.begin(), arr.end());
+    }
+}
+
 int main()
 {
     vector<int> arr = {49230, 89952, 25237, 91194, 97087, 48569, 16673, 45849, 38870, 13701};
-    cout << endl
-         << endl
-         << "-------------------------------------------------------------------" << endl;
-    cout << "arrey: ";
-    for (int i = 0; i < arr.size(); ++i)
-    {
-        cout << arr[i] << " ";
-    }
-    cout << endl;
-
-    vector<int> arr1 = arr;
-    orderedArray(arr1);
-    cout << endl
-         << endl;
-    vector<int> arr2 = arr;
-    orderedArray_Decrescente(arr2);
-
-    cout << endl
-         << "-------------------------------------------------------------------" << endl
-         << endl;
+    teste(20, arr);
     return 0;
 }
